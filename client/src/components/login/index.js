@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -7,6 +7,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
+import * as api from '../../api/authenticate';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,6 +25,12 @@ const Login = () => {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const login = useCallback(async () => {
+    const isSuccess = await api.login(username, password);
+    if (isSuccess) {
+      window.location.href = "/";
+    }
+  }, [username, password]);
 
   return (
     <Container className={classes.container} maxWidth="xs">
@@ -67,6 +74,8 @@ const Login = () => {
           fullWidth
           variant="contained"
           color="primary"
+          onClick={login}
+          disabled={username.length === 0 && password.length === 0}
         >
           Sign In
         </Button>

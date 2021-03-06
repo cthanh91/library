@@ -21,10 +21,12 @@ const login = async (req, res) => {
   res.send();
 };
 
-const test = async (req, res, next) => {
+const checkIdentity = async (req, res) => {
+  const user = req.session.user;
+  res.send(user);
 };
 
 module.exports = {
   login,
-  test
+  checkIdentity
 };

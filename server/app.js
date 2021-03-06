@@ -8,10 +8,19 @@ var bodyParser = require('body-parser');
 const session = require("express-session");
 const helmet = require("helmet");
 
-var index = require('./routes/index');
+var routes = require('./routes/index');
 
 var app = express();
+const cors = require("cors");
 
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      callback(null, true);
+    },
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -31,7 +40,7 @@ const sess = {
 };
 app.use(session(sess));
 
-app.use('/api/v1', index);
+app.use('/api/v1', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
