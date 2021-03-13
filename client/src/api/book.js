@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../util/constant';
 
 export const login = async (username, password) => {
   try {
     const res = await axios.post(
-      `${API_BASE_URL}/login`,
+      "http://localhost:3001/api/v1/login",
       {
         username,
         password,
@@ -21,7 +20,7 @@ export const login = async (username, password) => {
 
 export const logout = async () => {
   try {
-    const res = await axios.post(`${API_BASE_URL}/logout`, {}, {
+    const res = await axios.post("http://localhost:3001/api/v1/logout", {}, {
       withCredentials: true,
     });
     return res.status === 204;
@@ -32,7 +31,7 @@ export const logout = async () => {
 
 export const getIdentity = async () => {
   try {
-    const res = await axios.get(`${API_BASE_URL}/identity`, {
+    const res = await axios.get("http://localhost:3001/api/v1/identity", {
       withCredentials: true,
     });
     return res.data;

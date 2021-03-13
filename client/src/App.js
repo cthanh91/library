@@ -1,4 +1,6 @@
-import Login from './components/login';
+import Login from './page/login';
+import Home from './page/home';
+import Books from './page/books';
 import './App.css';
 import {
   Switch,
@@ -32,9 +34,8 @@ const App = () => {
           <Route exact path="/login">
             <Redirect to="/" />
           </Route>
-          <Route exact path="/">
-            <div>Home</div>
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/books" component={Books} />
           <Route path="*" component={NotFound} />
         </Switch>
       ) : (

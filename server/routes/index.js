@@ -7,6 +7,7 @@ const authorization = require('../middleware/authorization');
 router.post('/user', user.createUser);
 
 router.post('/login', authentication.login);
+router.post('/logout', authorization, authentication.logout);
 
 router.get('/identity',
   authorization,

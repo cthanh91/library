@@ -26,7 +26,13 @@ const checkIdentity = async (req, res) => {
   res.send(user);
 };
 
+const logout = async (req, res) => {
+  delete req.session.user;
+  res.status(204).send();
+};
+
 module.exports = {
   login,
+  logout,
   checkIdentity
 };

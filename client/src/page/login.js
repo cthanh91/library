@@ -7,7 +7,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
-import * as api from '../../api/authenticate';
+import * as api from '../api/authenticate';
 
 const useStyles = makeStyles((theme) => ({
   container: {
