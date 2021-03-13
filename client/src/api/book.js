@@ -1,37 +1,35 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../util/constant';
 
-export const login = async (username, password) => {
+export const getBooks = async () => {
   try {
-    const res = await axios.post(
-      "http://localhost:3001/api/v1/login",
-      {
-        username,
-        password,
-      },
-      {
-        withCredentials: true,
-      }
-    );
-    return res.status === 200;
-  } catch (e) {
-    return false;
-  }
-};
-
-export const logout = async () => {
-  try {
-    const res = await axios.post("http://localhost:3001/api/v1/logout", {}, {
+    const res = await axios.get(`${API_BASE_URL}/book`, {
       withCredentials: true,
     });
-    return res.status === 204;
+    return res.data;
   } catch (e) {
     return null;
   }
 };
 
-export const getIdentity = async () => {
+export const createBook = async (book) => {
   try {
-    const res = await axios.get("http://localhost:3001/api/v1/identity", {
+    const res = await axios.post(`${API_BASE_URL}/book`, {
+      ...book
+    },{
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const editBook = async (id, book) => {
+  try {
+    const res = await axios.put(`${API_BASE_URL}/book/${id}`, {
+      ...book
+    },{
       withCredentials: true,
     });
     return res.data;

@@ -20,14 +20,28 @@ const useStyles = makeStyles((theme) => ({
 
 const NewBookDialog = (props) => {
   const classes = useStyles();
-  const [name, setName] = useState("");
-  const [author, setAuthor] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const onCreate = () => {
-    props.onCreate({
-      name, author, publishedDate, quantity
-    })
+  const editingBook = props.editingBook || {};
+  const [name, setName] = useState(editingBook.name || "");
+  const [author, setAuthor] = useState(editingBook.author || "");
+  const [publishedDate, setPublishedDate] = useState(editingBook.publishedDate || "");
+  const [quantity, setQuantity] = useState(editingBook.quantity || 1);
+  const isEditing = props.isEditing;
+  const onSave = () => {
+    if (isEditing) {
+      props.onEdit(editingBook.id, {
+        name,
+        author,
+        publishedDate,
+        quantity,
+      });
+    } else {
+      props.onCreate({
+        name,
+        author,
+        publishedDate,
+        quantity,
+      });
+    }
   };
 
   return (
@@ -47,8 +61,8 @@ const NewBookDialog = (props) => {
           <Button onClick={props.onDialogClose} variant="contained" color="secondary">
             Cancel
           </Button>
-          <Button onClick={onCreate} variant="contained" color="primary">
-            Create
+          <Button onClick={onSave} variant="contained" color="primary">
+            { isEditing ? 'Edit' : 'Create' }
           </Button>
         </DialogActions>
       </Dialog>

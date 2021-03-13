@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const buttons = [
-  { label: "Books", href: "/book" },
+  { label: "Books", href: "/books" },
 ];
 
 const LeftMenu = () => {
