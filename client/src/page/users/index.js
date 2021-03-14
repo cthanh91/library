@@ -1,19 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Template from "../../template";
-import React, { useState, useEffect } from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import React, { useState, useEffect, useCallback } from "react";
 import Button from "@material-ui/core/Button";
 import UserDialog from "./userDialog";
+import UserTable from "./userTable";
 import ConfirmDialog from "../../components/confirmDialog";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import * as userApi from "../../api/user";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,28 +15,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  tableContainer: {
-    marginTop: 10,
-  },
-  table: {
-    minWidth: 650,
-    "& th": {
-      fontWeight: 700,
-    },
-    "& td > svg": {
-      cursor: "pointer"
-    }
-  },
   dialogContent: {
     display: "flex",
     flexDirection: "column",
     "& > *": {
       marginTop: 5,
     },
-  },
-  funtionContainer: {
-    alignSelf: "flex-end",
-  },
+  }
 }));
 
 const Users = () => {
@@ -55,14 +32,14 @@ const Users = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [deletingUser, setDeletingUser] = useState(null);
 
-  const openNew = () => {
+  const openNew = useCallback(() => {
     setEditingUser(null);
     setUserDialogOpen(true);
-  };
+  }, []);
 
-  const closeUserDialog = () => {
+  const closeUserDialog = useCallback(() => {
     setUserDialogOpen(false);
-  };
+  }, []);
 
   const createUser = async (user) => {
     const newUser = await userApi.createUser(user);
@@ -72,9 +49,11 @@ const Users = () => {
 
   const editUser = async (id, user) => {
     const updatedUser = await userApi.editUser(id, user);
-    const index = users.findIndex(userItem => userItem.id === updatedUser.id);
-    users.splice(index, 1, updatedUser);
-    setUsers(users);
+    const updatedUsers = users.map((userItem) => {
+      if (userItem.id === updatedUser.id) return updatedUser;
+      else return userItem;
+    });
+    setUsers(updatedUsers);
     setUserDialogOpen(false);
     setEditingUser(null);
   };
@@ -87,19 +66,19 @@ const Users = () => {
     setDeletingUser(null);
   };
 
-  const closeConfirmDialog = () => {
+  const closeConfirmDialog = useCallback(() => {
     setConfirmDialogOpen(false);
-  }
+  }, []);
 
-  const openEdit = async (user) => {
+  const openEdit = useCallback(async (user) => {
     setEditingUser(user);
     setUserDialogOpen(true);
-  };
+  }, []);
 
-  const openDelete = async (user) => {
+  const openDelete = useCallback(async (user) => {
     setDeletingUser(user);
     setConfirmDialogOpen(true);
-  };
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -117,35 +96,7 @@ const Users = () => {
             New
           </Button>
         </div>
-        <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table
-            className={classes.table}
-            size="small"
-            aria-label="a dense table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Username</TableCell>
-                <TableCell>Bar Code</TableCell>
-                <TableCell>Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.username}</TableCell>
-                  <TableCell>{user.barCode}</TableCell>
-                  <TableCell>
-                    <EditIcon fontSize="small" onClick={() => openEdit(user)} />
-                    <DeleteIcon fontSize="small" onClick={() => openDelete(user)} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <UserTable users={users} onEdit={openEdit} onDelete={openDelete} />
       </Container>
       {
         userDialogOpen && (
