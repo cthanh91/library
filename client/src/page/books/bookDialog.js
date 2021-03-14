@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NewBookDialog = (props) => {
+const BookDialog = (props) => {
   const classes = useStyles();
   const editingBook = props.editingBook || {};
   const [name, setName] = useState(editingBook.name || "");
@@ -69,4 +69,4 @@ const NewBookDialog = (props) => {
   );
 };
 
-export default NewBookDialog;
+export default BookDialog;

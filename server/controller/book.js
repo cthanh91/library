@@ -15,7 +15,6 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const id = req.params.id;
   const { name, author, publishedDate, quantity } = req.body;
-  console.log(req.params)
   const book = await Book.findByPk(id);
   if (!book) {
     res.status(404).send();
@@ -26,8 +25,21 @@ const update = async (req, res) => {
   res.send(book);
 };
 
+const destroy = async (req, res) => {
+  const id = req.params.id;
+  const book = await Book.findByPk(id);
+  if (!book) {
+    res.status(404).send();
+    return;
+  } 
+  await book.destroy();
+  res.status(204).send();
+};
+
+
 module.exports = {
   getAll,
   create,
-  update
+  update,
+  destroy
 };

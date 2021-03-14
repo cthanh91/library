@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Template from "../template";
+import Template from "../../template";
 import React, { useState, useEffect } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,10 +10,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import NewBookDialog from "../components/newBookDialog";
+import BookDialog from "./bookDialog";
+import ConfirmDialog from "../../components/confirmDialog";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import * as bookApi from "../api/book";
+import * as bookApi from "../../api/book";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     "& th": {
       fontWeight: 700,
     },
+    "& td > svg": {
+      cursor: "pointer"
+    }
   },
   dialogContent: {
     display: "flex",
@@ -45,23 +49,25 @@ const useStyles = makeStyles((theme) => ({
 
 const Books = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [bookDialogOpen, setBookDialogOpen] = useState(false);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [books, setBooks] = useState([]);
   const [editingBook, setEditingBook] = useState(null);
+  const [deletingBook, setDeletingBook] = useState(null);
 
   const openNew = () => {
     setEditingBook(null);
-    setOpen(true);
+    setBookDialogOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const closeBookDialog = () => {
+    setBookDialogOpen(false);
   };
 
   const createBook = async (book) => {
     const newBook = await bookApi.createBook(book);
     setBooks([newBook, ...books]);
-    setOpen(false);
+    setBookDialogOpen(false);
   };
 
   const editBook = async (id, book) => {
@@ -70,12 +76,29 @@ const Books = () => {
     books.splice(index, 1, updatedBook);
     setBooks(books);
     setEditingBook(null);
-    setOpen(false);
+    setBookDialogOpen(false);
   };
+
+  const deleteBook = async () => {
+    await bookApi.deleteBook(deletingBook.id);
+    const updateBooks = books.filter(bookItem => bookItem.id !== deletingBook.id);
+    setBooks(updateBooks);
+    setDeletingBook(null);
+    setConfirmDialogOpen(false);
+  };
+
+  const closeConfirmDialog = () => {
+    setConfirmDialogOpen(false);
+  }
 
   const openEdit = async (book) => {
     setEditingBook(book);
-    setOpen(true);
+    setBookDialogOpen(true);
+  };
+
+  const openDelete = async (book) => {
+    setDeletingBook(book);
+    setConfirmDialogOpen(true);
   };
 
   useEffect(() => {
@@ -118,7 +141,7 @@ const Books = () => {
                   <TableCell>{book.quantity}</TableCell>
                   <TableCell>
                     <EditIcon fontSize="small" onClick={() => openEdit(book)} />
-                    <DeleteIcon fontSize="small" />
+                    <DeleteIcon fontSize="small" onClick={() => openDelete(book)} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -127,14 +150,24 @@ const Books = () => {
         </TableContainer>
       </Container>
       {
-        open && (
-          <NewBookDialog
-            open={open}
-            onDialogClose={handleClose}
+        bookDialogOpen && (
+          <BookDialog
+            open={bookDialogOpen}
+            onDialogClose={closeBookDialog}
             onCreate={createBook}
             onEdit={editBook}
             isEditing={editingBook != null}
             editingBook={editingBook}
+          />
+        )
+      }
+      {
+        confirmDialogOpen && (
+          <ConfirmDialog
+            open={confirmDialogOpen}
+            textContent={`Do you want to delete "${deletingBook.name}"?`}
+            onDialogClose={closeConfirmDialog}
+            onOk={deleteBook}
           />
         )
       }

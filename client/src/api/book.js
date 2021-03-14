@@ -37,3 +37,14 @@ export const editBook = async (id, book) => {
     return null;
   }
 };
+
+export const deleteBook = async (id, book) => {
+  try {
+    const res = await axios.delete(`${API_BASE_URL}/book/${id}`,{
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (e) {
+    return null;
+  }
+};
