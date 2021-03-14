@@ -7,22 +7,22 @@ const getAll = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { name, author, publishedDate, quantity } = req.body;
-  const createdBook = await Book.create({ name, author, publishedDate, quantity })
-  res.send(createdBook);
+  const { title, author, publishedDate, quantity } = req.body;
+  const createdBook = await Book.create({ title, author, publishedDate, quantity })
+  res.send(createdBook.toJSON());
 };
 
 const update = async (req, res) => {
   const id = req.params.id;
-  const { name, author, publishedDate, quantity } = req.body;
+  const { title, author, publishedDate, quantity } = req.body;
   const book = await Book.findByPk(id);
   if (!book) {
     res.status(404).send();
     return;
   } 
-  book.setAttributes({ name, author, publishedDate, quantity });
+  book.setAttributes({ title, author, publishedDate, quantity });
   await book.save(); 
-  res.send(book);
+  res.send(book.toJSON());
 };
 
 const destroy = async (req, res) => {
@@ -35,7 +35,6 @@ const destroy = async (req, res) => {
   await book.destroy();
   res.status(204).send();
 };
-
 
 module.exports = {
   getAll,

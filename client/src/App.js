@@ -1,6 +1,7 @@
 import Login from './page/login';
 import Home from './page/home';
 import Books from './page/books';
+import Users from './page/users';
 import './App.css';
 import {
   Switch,
@@ -36,6 +37,7 @@ const App = () => {
           </Route>
           <Route exact path="/" component={Home} />
           <Route exact path="/books" component={Books} />
+          <Route exact path="/users" component={Users} />
           <Route path="*" component={NotFound} />
         </Switch>
       ) : (

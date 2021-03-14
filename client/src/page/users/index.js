@@ -10,11 +10,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import BookDialog from "./bookDialog";
+import UserDialog from "./userDialog";
 import ConfirmDialog from "../../components/confirmDialog";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import * as bookApi from "../../api/book";
+import * as userApi from "../../api/user";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,64 +47,64 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Books = () => {
+const Users = () => {
   const classes = useStyles();
-  const [bookDialogOpen, setBookDialogOpen] = useState(false);
+  const [userDialogOpen, setUserDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [editingBook, setEditingBook] = useState(null);
-  const [deletingBook, setDeletingBook] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [editingUser, setEditingUser] = useState(null);
+  const [deletingUser, setDeletingUser] = useState(null);
 
   const openNew = () => {
-    setEditingBook(null);
-    setBookDialogOpen(true);
+    setEditingUser(null);
+    setUserDialogOpen(true);
   };
 
-  const closeBookDialog = () => {
-    setBookDialogOpen(false);
+  const closeUserDialog = () => {
+    setUserDialogOpen(false);
   };
 
-  const createBook = async (book) => {
-    const newBook = await bookApi.createBook(book);
-    setBooks([newBook, ...books]);
-    setBookDialogOpen(false);
+  const createUser = async (user) => {
+    const newUser = await userApi.createUser(user);
+    setUsers([newUser, ...users]);
+    setUserDialogOpen(false);
   };
 
-  const editBook = async (id, book) => {
-    const updatedBook = await bookApi.editBook(id, book);
-    const index = books.findIndex(bookItem => bookItem.id === updatedBook.id);
-    books.splice(index, 1, updatedBook);
-    setBooks(books);
-    setEditingBook(null);
-    setBookDialogOpen(false);
+  const editUser = async (id, user) => {
+    const updatedUser = await userApi.editUser(id, user);
+    const index = users.findIndex(userItem => userItem.id === updatedUser.id);
+    users.splice(index, 1, updatedUser);
+    setUsers(users);
+    setUserDialogOpen(false);
+    setEditingUser(null);
   };
 
-  const deleteBook = async () => {
-    await bookApi.deleteBook(deletingBook.id);
-    const updateBooks = books.filter(bookItem => bookItem.id !== deletingBook.id);
-    setBooks(updateBooks);
+  const deleteUser = async () => {
+    await userApi.deleteUser(deletingUser.id);
+    const updatedUsers = users.filter(userItem => userItem.id !== deletingUser.id);
+    setUsers(updatedUsers);
     setConfirmDialogOpen(false);
-    setDeletingBook(null);
+    setDeletingUser(null);
   };
 
   const closeConfirmDialog = () => {
     setConfirmDialogOpen(false);
   }
 
-  const openEdit = async (book) => {
-    setEditingBook(book);
-    setBookDialogOpen(true);
+  const openEdit = async (user) => {
+    setEditingUser(user);
+    setUserDialogOpen(true);
   };
 
-  const openDelete = async (book) => {
-    setDeletingBook(book);
+  const openDelete = async (user) => {
+    setDeletingUser(user);
     setConfirmDialogOpen(true);
   };
 
   useEffect(() => {
     const getData = async () => {
-      const books = await bookApi.getBooks();
-      setBooks(books);
+      const users = await userApi.getUsers();
+      setUsers(users);
     };
     getData();
   }, []);
@@ -125,23 +125,21 @@ const Books = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>Author</TableCell>
-                <TableCell>Published Date</TableCell>
-                <TableCell>Quantity</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Username</TableCell>
+                <TableCell>Bar Code</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {books.map((book) => (
-                <TableRow key={book.id}>
-                  <TableCell>{book.title}</TableCell>
-                  <TableCell>{book.author}</TableCell>
-                  <TableCell>{book.publishedDate}</TableCell>
-                  <TableCell>{book.quantity}</TableCell>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.barCode}</TableCell>
                   <TableCell>
-                    <EditIcon fontSize="small" onClick={() => openEdit(book)} />
-                    <DeleteIcon fontSize="small" onClick={() => openDelete(book)} />
+                    <EditIcon fontSize="small" onClick={() => openEdit(user)} />
+                    <DeleteIcon fontSize="small" onClick={() => openDelete(user)} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -150,14 +148,14 @@ const Books = () => {
         </TableContainer>
       </Container>
       {
-        bookDialogOpen && (
-          <BookDialog
-            open={bookDialogOpen}
-            onDialogClose={closeBookDialog}
-            onCreate={createBook}
-            onEdit={editBook}
-            isEditing={editingBook != null}
-            editingBook={editingBook}
+        userDialogOpen && (
+          <UserDialog
+            open={userDialogOpen}
+            onDialogClose={closeUserDialog}
+            onCreate={createUser}
+            onEdit={editUser}
+            isEditing={editingUser != null}
+            editingUser={editingUser}
           />
         )
       }
@@ -165,9 +163,9 @@ const Books = () => {
         confirmDialogOpen && (
           <ConfirmDialog
             open={confirmDialogOpen}
-            textContent={`Do you want to delete "${deletingBook && deletingBook.title}"?`}
+            textContent={`Do you want to delete "${deletingUser && deletingUser.name}"?`}
             onDialogClose={closeConfirmDialog}
-            onOk={deleteBook}
+            onOk={deleteUser}
           />
         )
       }
@@ -175,4 +173,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default Users;

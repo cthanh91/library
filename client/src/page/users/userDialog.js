@@ -20,26 +20,26 @@ const useStyles = makeStyles((theme) => ({
 
 const BookDialog = (props) => {
   const classes = useStyles();
-  const editingBook = props.editingBook || {};
-  const [title, setTitle] = useState(editingBook.title || "");
-  const [author, setAuthor] = useState(editingBook.author || "");
-  const [publishedDate, setPublishedDate] = useState(editingBook.publishedDate || "");
-  const [quantity, setQuantity] = useState(editingBook.quantity || 1);
+  const editingUser = props.editingUser || {};
+  const [name, setName] = useState(editingUser.name || "");
+  const [username, setUsername] = useState(editingUser.username || "");
+  const [barCode, setBarCode] = useState(editingUser.barCode || "");
+  const [password, setPassword] = useState(editingUser.password || "");
   const isEditing = props.isEditing;
   const onSave = () => {
     if (isEditing) {
-      props.onEdit(editingBook.id, {
-        title,
-        author,
-        publishedDate,
-        quantity,
+      props.onEdit(editingUser.id, {
+        name,
+        username,
+        barCode,
+        password,
       });
     } else {
       props.onCreate({
-        title,
-        author,
-        publishedDate,
-        quantity,
+        name,
+        username,
+        barCode,
+        password,
       });
     }
   };
@@ -50,12 +50,12 @@ const BookDialog = (props) => {
         onClose={props.onDialogClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Book</DialogTitle>
+        <DialogTitle id="form-dialog-title">User</DialogTitle>
         <DialogContent className={classes.dialogContent}>
-          <TextField label="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          <TextField label="Author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
-          <TextField label="Published Date" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} />
-          <TextField type="number" label="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} required />
+          <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+          <TextField label="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <TextField label="Bar Code" value={barCode} onChange={(e) => setBarCode(e.target.value)} />
+          <TextField label="Set New Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onDialogClose} variant="contained" color="secondary">
