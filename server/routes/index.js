@@ -12,6 +12,8 @@ router.get('/book', authorization, book.getAll);
 router.post('/book', authorization, book.create);
 router.put('/book/:id', authorization, book.update);
 router.delete('/book/:id', authorization, book.destroy);
+router.get('/book/search', authorization, book.search);
+router.post('/book/:id/borrow', authorization, book.borrow);
 
 router.get('/user', authorization, user.getAll);
 router.post('/user', authorization, user.create);

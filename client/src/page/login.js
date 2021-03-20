@@ -32,6 +32,12 @@ const Login = () => {
     }
   }, [username, password]);
 
+  const onKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      login();
+    }
+  };
+
   return (
     <Container className={classes.container} maxWidth="xs">
       <Grid
@@ -58,6 +64,7 @@ const Login = () => {
           label="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          onKeyUp={onKeyUp}
         />
         <TextField
           margin="normal"
@@ -67,6 +74,7 @@ const Login = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyUp={onKeyUp}
         />
         <Button
           type="submit"

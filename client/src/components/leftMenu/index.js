@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const buttons = [
   { label: "Books", href: "/books" },
   { label: "Users", href: "/users" },
+  { label: "Borrow", href: "/borrow" },
 ];
 
 const LeftMenu = () => {

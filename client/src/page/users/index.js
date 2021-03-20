@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       marginTop: 5,
     },
+  },
+  funtionContainer: {
+    alignSelf: "flex-end",
   }
 }));
 

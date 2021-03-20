@@ -22,10 +22,7 @@ const useStyles = makeStyles((theme) => ({
     "& td > svg": {
       cursor: "pointer",
     },
-  },
-  funtionContainer: {
-    alignSelf: "flex-end",
-  },
+  }
 }));
 
 const UserTable = (props) => {

@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   tableContainer: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const BookTable = (props) => {
+const BookResult = (props) => {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,6 @@ const BookTable = (props) => {
             <TableCell>Title</TableCell>
             <TableCell>Author</TableCell>
             <TableCell>Published Date</TableCell>
-            <TableCell>Quantity</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -46,10 +45,10 @@ const BookTable = (props) => {
               <TableCell>{book.title}</TableCell>
               <TableCell>{book.author}</TableCell>
               <TableCell>{book.publishedDate}</TableCell>
-              <TableCell>{book.quantity}</TableCell>
               <TableCell>
-                <EditIcon fontSize="small" onClick={() => props.onEdit(book)} />
-                <DeleteIcon fontSize="small" onClick={() => props.onDelete(book)} />
+                <Button variant="contained" onClick={() => props.onBorrow(book)} color="primary">
+                  Borrow
+                </Button>
               </TableCell>
             </TableRow>
           ))}
@@ -59,4 +58,4 @@ const BookTable = (props) => {
   );
 };
 
-export default React.memo(BookTable);
+export default React.memo(BookResult);

@@ -1,4 +1,5 @@
 const { Book } = require('../models');
+const { Op } = require('sequelize');
 
 const getAll = async (req, res) => {
   const books = await Book.findAll();
@@ -36,9 +37,40 @@ const destroy = async (req, res) => {
   res.status(204).send();
 };
 
+const search = async (req, res) => {
+  const text = req.query.text;
+  const books = await Book.findAll({
+    where: {
+      title: {
+        [Op.iLike]: `%${text}%`
+      }
+    }
+  });
+  const result = books.map(book => ({
+    author: book.author,
+    id: book.id,
+    publishedDate: book.publishedDate,
+    title: book.title
+  }));
+  res.send(result);
+};
+
+const borrow = async (req, res) => {
+  const id = req.params.id;
+  // const book = await Book.findByPk(id);
+  // if (!book) {
+  //   res.status(404).send();
+  //   return;
+  // } 
+  // await book.destroy();
+  res.status(204).send();
+};
+
 module.exports = {
   getAll,
   create,
   update,
-  destroy
+  destroy,
+  search,
+  borrow
 };

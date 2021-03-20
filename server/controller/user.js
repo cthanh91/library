@@ -4,7 +4,7 @@ const { hashPassword } = require('../util/password');
 const create = async (req, res) => {
   const { username, password, name, email, barCode } = req.body;
   if (!username || !password || !name || !barCode) {
-    res.status(400).send('Missing params')
+    res.status(400).send('Missing params');
     return;
   }
   const user = await User.create({

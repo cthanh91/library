@@ -16,6 +16,7 @@ const login = async (req, res) => {
     res.status(401).send();
   }
   req.session.user = {
+    id: user.id,
     username: user.username
   };
   res.send();
