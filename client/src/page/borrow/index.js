@@ -1,14 +1,10 @@
-import React, { useState, useCallback } from "react";
-import Grid from "@material-ui/core/Grid";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import Container from "@material-ui/core/Container";
-import InputBase from "@material-ui/core/InputBase";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import * as api from "../../api/book";
 import Template from "../../template";
 import BookResult from "./bookResult";
@@ -48,6 +44,7 @@ const BookBorrowing = () => {
 
   const borrowBook = async () => {
     await api.borrowBook(borrowingBook.id);
+    setConfirmDialogOpen(false);
   };
 
   return (

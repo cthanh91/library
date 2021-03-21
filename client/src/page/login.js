@@ -58,6 +58,7 @@ const Login = () => {
           </Typography>
         </Grid>
         <TextField
+          autoFocus
           margin="normal"
           variant="outlined"
           fullWidth

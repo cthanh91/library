@@ -1,4 +1,4 @@
-const { Book } = require('../models');
+const { Book, Borrowing } = require('../models');
 const { Op } = require('sequelize');
 
 const getAll = async (req, res) => {
@@ -56,18 +56,43 @@ const search = async (req, res) => {
 };
 
 const borrow = async (req, res) => {
-  const id = req.params.id;
-  // const book = await Book.findByPk(id);
-  // if (!book) {
-  //   res.status(404).send();
-  //   return;
-  // } 
-  // await book.destroy();
-  res.status(204).send();
+  const bookId = req.params.id;
+  const borrowing = await Borrowing.findOrCreate({
+    where: {
+      userId: req.session.user.id,
+      bookId: parseInt(bookId)
+    },
+    defaults: {
+      userId: req.session.user.id,
+      bookId: parseInt(bookId)
+    }
+  });
+  res.status(204).send(borrowing);
+};
+
+const getBorrowingBooks = async (req, res) => {
+  const borrowings = await Borrowing.findAll({
+    where: {
+      userId: req.session.user.id
+    }
+  });
+  const borrowingBooks = await Book.findAll({
+    where: {
+      id: borrowings.map(borrowing => borrowing.bookId)
+    }
+  });
+  const result = borrowingBooks.map(book => ({
+    author: book.author,
+    id: book.id,
+    borrowedDate: book.createdAt,
+    title: book.title
+  }));
+  res.send(result);
 };
 
 module.exports = {
   getAll,
+  getBorrowingBooks,
   create,
   update,
   destroy,

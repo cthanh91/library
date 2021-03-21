@@ -2,7 +2,8 @@ import Login from './page/login';
 import Home from './page/home';
 import Books from './page/books';
 import Users from './page/users';
-import BookBorrowing from './page/bookBorrowing';
+import Borrow from './page/borrow';
+import Borrowing from './page/borrowing';
 import './App.css';
 import {
   Switch,
@@ -39,7 +40,8 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/books" component={Books} />
           <Route exact path="/users" component={Users} />
-          <Route exact path="/borrow" component={BookBorrowing} />
+          <Route exact path="/borrow" component={Borrow} />
+          <Route exact path="/borrowing" component={Borrowing} />
           <Route path="*" component={NotFound} />
         </Switch>
       ) : (

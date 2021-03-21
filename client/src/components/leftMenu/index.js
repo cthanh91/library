@@ -36,6 +36,7 @@ const buttons = [
   { label: "Books", href: "/books" },
   { label: "Users", href: "/users" },
   { label: "Borrow", href: "/borrow" },
+  { label: "Borrowing", href: "/borrowing" },
 ];
 
 const LeftMenu = () => {
