@@ -22,6 +22,10 @@ const App = () => {
   useEffect(() => {
     const checkIdentity = async () => {
       const user = await api.getIdentity();
+      if (user) {
+        localStorage.setItem("userRole", user.role);
+        localStorage.setItem("userName", user.name);
+      }
       setIsLoggedIn(user != null);
     };
     checkIdentity();

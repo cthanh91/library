@@ -32,11 +32,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const buttons = [
-  { label: "Books", href: "/books" },
-  { label: "Users", href: "/users" },
+const buttonsForStudent = [
   { label: "Borrow", href: "/borrow" },
   { label: "Borrowing", href: "/borrowing" },
+];
+
+const buttonsForAdmin = [
+  { label: "Books", href: "/books" },
+  { label: "Users", href: "/users" },
 ];
 
 const LeftMenu = () => {
@@ -44,11 +47,13 @@ const LeftMenu = () => {
   const history = useHistory();
   const logout = useCallback(async () => {
     const isSuccess = await api.logout();
-    console.log(isSuccess)
     if (isSuccess) {
       window.location.href = "/login";
     }
   }, []);
+  const userRole = window.localStorage.userRole;
+  const userName = window.localStorage.userName || "";
+  const buttonList = userRole && userRole.includes("Administrator") ? buttonsForAdmin : buttonsForStudent;
 
   return (
     <Drawer anchor="left" variant="permanent" className={classes.drawer}>
@@ -57,7 +62,7 @@ const LeftMenu = () => {
           <MenuBookIcon className={classes.icon} />
           <Divider />
           <List>
-            {buttons.map((button, index) => (
+            {buttonList.map((button, index) => (
               <ListItem
                 button
                 key={button.href}
@@ -70,11 +75,11 @@ const LeftMenu = () => {
         </Box>
         <Box>
           <Divider />
-          <ListItem button>
+          <ListItem button onClick={logout}>
             <ListItemAvatar>
-              <Avatar>T</Avatar>
+              <Avatar>{userName[0] || "U"}</Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Log Out" onClick={logout} />
+            <ListItemText primary="Log Out" />
           </ListItem>
         </Box>
       </Box>
