@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: 50,
   },
+  header: {
+    textAlign: "center",
+    padding: "20px 0"
+  },
   searchBar: {
     alignSelf: "center",
     width: "50%",
@@ -51,6 +55,7 @@ const Borrowing = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
+        <h1 className={classes.header}>Brrowing Books</h1>
         {
           borrowings.length > 0 ? (
             <>

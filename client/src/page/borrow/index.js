@@ -15,9 +15,16 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: 50,
   },
+  header: {
+    textAlign: "center",
+    padding: "20px 0"
+  },
+  searchBarContainer: {
+    alignSelf: "flex-start",
+    width: "50%"
+  },
   searchBar: {
-    alignSelf: "center",
-    width: "50%",
+    width: "100%",
     marginBottom: 20
   }
 }));
@@ -53,7 +60,8 @@ const BookBorrowing = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
-        <Box>
+        <h1 className={classes.header}>Brrow Book</h1>
+        <Box className={classes.searchBarContainer}>
           <TextField
             className={classes.searchBar}
             text={textSearch}

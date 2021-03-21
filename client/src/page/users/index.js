@@ -94,6 +94,7 @@ const Users = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
+        <h1>Users</h1>
         <div className={classes.funtionContainer}>
           <Button variant="contained" color="primary" onClick={openNew}>
             New
