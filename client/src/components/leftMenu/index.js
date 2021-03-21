@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: "#1976d2",
     fontSize: "6rem",
-    padding: "20px"
+    padding: "20px",
+    cursor: "pointer"
   },
   drawerBox: {
     height: "100vh",
@@ -59,7 +60,7 @@ const LeftMenu = () => {
     <Drawer anchor="left" variant="permanent" className={classes.drawer}>
       <Box className={classes.drawerBox}>
         <Box>
-          <MenuBookIcon className={classes.icon} />
+          <MenuBookIcon className={classes.icon} onClick={() => history.push("")} />
           <Divider />
           <List>
             {buttonList.map((button, index) => (
