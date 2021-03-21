@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ConfirmDialog = (props) => {
+const AlertDialog = (props) => {
   const classes = useStyles();
 
   return (
@@ -27,15 +27,12 @@ const ConfirmDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.onDialogClose} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={props.onOk} color="primary">
-            OK
+          <Button onClick={props.onDialogClose} color="primary">
+            Got It
           </Button>
         </DialogActions>
       </Dialog>
   );
 };
 
-export default ConfirmDialog;
+export default AlertDialog;

@@ -9,11 +9,18 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   dialogContent: {
+    paddingTop: 0,
     width: 400,
     display: "flex",
     flexDirection: "column",
     "& > *": {
       marginTop: 5
+    }
+  },
+  dialogTitle: {
+    paddingBottom: 0,
+    "& > h2": {
+      fontWeight: 600
     }
   }
 }));
@@ -50,7 +57,7 @@ const BookDialog = (props) => {
         onClose={props.onDialogClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">User</DialogTitle>
+        <DialogTitle id="form-dialog-title" className={classes.dialogTitle}>User</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
           <TextField label="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -58,11 +65,11 @@ const BookDialog = (props) => {
           <TextField label="Set New Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.onDialogClose} variant="contained" color="secondary">
+          <Button onClick={props.onDialogClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={onSave} variant="contained" color="primary">
-            { isEditing ? 'Edit' : 'Create' }
+          <Button onClick={onSave} color="primary">
+            { isEditing ? 'Save' : 'Create' }
           </Button>
         </DialogActions>
       </Dialog>

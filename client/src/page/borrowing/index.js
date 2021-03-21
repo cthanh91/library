@@ -6,6 +6,7 @@ import * as api from "../../api/borrowing";
 import Template from "../../template";
 import BookBorrowing from "./bookBorrowing";
 import ConfirmDialog from "../../components/confirmDialog";
+import AlertDialog from "../../components/alertDialog";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,6 +23,7 @@ const Borrowing = () => {
   const classes = useStyles();
   const [borrowings, setBorrowings] = useState([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [returningBorrowing, setReturningBorrowing] = useState(null);
 
   const onReturn = (borrowing) => {
@@ -35,6 +37,7 @@ const Borrowing = () => {
     setBorrowings(updatedBorrowings);
     setConfirmDialogOpen(false);
     setReturningBorrowing(null);
+    setAlertDialogOpen(true);
   };
 
   useEffect(() => {
@@ -70,6 +73,11 @@ const Borrowing = () => {
           />
         )
       }
+      <AlertDialog
+        open={alertDialogOpen}
+        textContent={`Please go to library to return the book`}
+        onDialogClose={() => setAlertDialogOpen(false)}
+      />
     </Template>
   );
 };

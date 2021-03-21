@@ -9,6 +9,7 @@ import * as api from "../../api/book";
 import Template from "../../template";
 import BookResult from "./bookResult";
 import ConfirmDialog from "../../components/confirmDialog";
+import AlertDialog from "../../components/alertDialog";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,6 +27,7 @@ const BookBorrowing = () => {
   const [textSearch, setTextSearch] = useState("");
   const [books, setBooks] = useState([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [borrowingBook, setBorrowingBook] = useState(null);
 
   const onKeyUp = async (e) => {
@@ -45,6 +47,7 @@ const BookBorrowing = () => {
   const borrowBook = async () => {
     await api.borrowBook(borrowingBook.id);
     setConfirmDialogOpen(false);
+    setAlertDialogOpen(true);
   };
 
   return (
@@ -64,28 +67,30 @@ const BookBorrowing = () => {
             }}
           />
         </Box>
-        {
-          books.length > 0 ? (
-            <>
-              <Typography>{books.length} Result</Typography>
-              <BookResult books={books} onBorrow={onBorrow} />
-            </>
-          )
-          : (
-            <Typography>No Results</Typography>
-          )
-        }
+        {books.length > 0 ? (
+          <>
+            <Typography>{books.length} Result</Typography>
+            <BookResult books={books} onBorrow={onBorrow} />
+          </>
+        ) : (
+          <Typography>No Results</Typography>
+        )}
       </Container>
-      {
-        confirmDialogOpen && (
-          <ConfirmDialog
-            open={confirmDialogOpen}
-            textContent={`Do you want to borrow "${borrowingBook && borrowingBook.title}"?`}
-            onDialogClose={() => setConfirmDialogOpen(false)}
-            onOk={borrowBook}
-          />
-        )
-      }
+      {confirmDialogOpen && (
+        <ConfirmDialog
+          open={confirmDialogOpen}
+          textContent={`Do you want to borrow "${
+            borrowingBook && borrowingBook.title
+          }"?`}
+          onDialogClose={() => setConfirmDialogOpen(false)}
+          onOk={borrowBook}
+        />
+      )}
+      <AlertDialog
+        open={alertDialogOpen}
+        textContent={`Please go to library to to take the book`}
+        onDialogClose={() => setAlertDialogOpen(false)}
+      />
     </Template>
   );
 };

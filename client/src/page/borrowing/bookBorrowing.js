@@ -44,7 +44,7 @@ const BookBorrowing = (props) => {
             <TableRow key={borrowing.id}>
               <TableCell>{borrowing.book.title}</TableCell>
               <TableCell>{borrowing.book.author}</TableCell>
-              <TableCell>{moment(borrowing.borrowedDate).format("HH:mm:ss DD-MM-YYYY")}</TableCell>
+              <TableCell>{moment(borrowing.borrowedDate).format("HH:mm DD-MM-YYYY")}</TableCell>
               <TableCell>
                 <Button variant="contained" onClick={() => props.onReturn(borrowing)} color="primary">
                   Return
