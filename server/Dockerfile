@@ -1,10 +1,9 @@
-FROM node:12-alpine3.10
+FROM node:12-alpine3.1e
 
 WORKDIR /app
 
 COPY ./package.json /app/
-COPY ./yarn.lock /app/
-RUN yarn install
+RUN npm install
 
 COPY ./ /app/
 
