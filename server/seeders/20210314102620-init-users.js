@@ -8,7 +8,7 @@ module.exports = {
       username: "admin",
       password: hashPassword("1"),
       name: "Admin",
-      barCode: "1",
+      barcode: "1",
       role: "Administrator"
     });
   },

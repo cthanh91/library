@@ -35,7 +35,7 @@ const UserTable = (props) => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Username</TableCell>
-            <TableCell>Bar Code</TableCell>
+            <TableCell>Barcode</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -44,7 +44,7 @@ const UserTable = (props) => {
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.username}</TableCell>
-              <TableCell>{user.barCode}</TableCell>
+              <TableCell>{user.barcode}</TableCell>
               <TableCell>
                 <EditIcon fontSize="small" onClick={() => props.onEdit(user)} />
                 <DeleteIcon

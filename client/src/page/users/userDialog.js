@@ -30,7 +30,7 @@ const BookDialog = (props) => {
   const editingUser = props.editingUser || {};
   const [name, setName] = useState(editingUser.name || "");
   const [username, setUsername] = useState(editingUser.username || "");
-  const [barCode, setBarCode] = useState(editingUser.barCode || "");
+  const [barcode, setBarcode] = useState(editingUser.barcode || "");
   const [password, setPassword] = useState(editingUser.password || "");
   const isEditing = props.isEditing;
   const onSave = () => {
@@ -38,14 +38,14 @@ const BookDialog = (props) => {
       props.onEdit(editingUser.id, {
         name,
         username,
-        barCode,
+        barcode,
         password,
       });
     } else {
       props.onCreate({
         name,
         username,
-        barCode,
+        barcode,
         password,
       });
     }
@@ -61,7 +61,7 @@ const BookDialog = (props) => {
         <DialogContent className={classes.dialogContent}>
           <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
           <TextField label="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-          <TextField label="Bar Code" value={barCode} onChange={(e) => setBarCode(e.target.value)} />
+          <TextField label="Barcode" value={barcode} onChange={(e) => setBarcode(e.target.value)} />
           <TextField label="Set New Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </DialogContent>
         <DialogActions>

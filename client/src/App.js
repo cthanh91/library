@@ -4,6 +4,7 @@ import Books from './page/books';
 import Users from './page/users';
 import Borrow from './page/borrow';
 import Borrowing from './page/borrowing';
+import UserScan from './page/userScan';
 import './App.css';
 import {
   Switch,
@@ -46,6 +47,7 @@ const App = () => {
           <Route exact path="/users" component={Users} />
           <Route exact path="/borrow" component={Borrow} />
           <Route exact path="/borrowing" component={Borrowing} />
+          <Route exact path="/user-scan" component={UserScan} />
           <Route path="*" component={NotFound} />
         </Switch>
       ) : (

@@ -29,20 +29,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const BookBorrowing = () => {
+const Borrow = () => {
   const classes = useStyles();
-  const [textSearch, setTextSearch] = useState("");
   const [books, setBooks] = useState([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [borrowingBook, setBorrowingBook] = useState(null);
 
   const onKeyUp = async (e) => {
-    if (e.keyCode === 13 && textSearch) {
-      const result = await api.searchBook(textSearch);
+    const value = e.target.value;
+    if (e.keyCode === 13 && value) {
+      const result = await api.searchBook(value);
       setBooks(result);
-    } else {
-      setTextSearch(e.target.value);
     }
   };
 
@@ -64,7 +62,6 @@ const BookBorrowing = () => {
         <Box className={classes.searchBarContainer}>
           <TextField
             className={classes.searchBar}
-            text={textSearch}
             onKeyUp={onKeyUp}
             placeholder="Search..."
             type="search"
@@ -103,4 +100,4 @@ const BookBorrowing = () => {
   );
 };
 
-export default BookBorrowing;
+export default Borrow;

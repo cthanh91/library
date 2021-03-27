@@ -12,6 +12,17 @@ export const getUsers = async () => {
   }
 };
 
+export const getUserByBarcode = async (barcode) => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/user/barcode/${barcode}`, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (e) {
+    return null;
+  }
+};
+
 export const createUser = async (user) => {
   try {
     const res = await axios.post(`${API_BASE_URL}/user`, {

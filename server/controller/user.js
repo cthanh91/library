@@ -2,8 +2,8 @@ const { User } = require('../models');
 const { hashPassword } = require('../util/password'); 
 
 const create = async (req, res) => {
-  const { username, password, name, email, barCode } = req.body;
-  if (!username || !password || !name || !barCode) {
+  const { username, password, name, email, barcode } = req.body;
+  if (!username || !password || !name || !barcode) {
     res.status(400).send('Missing params');
     return;
   }
@@ -12,13 +12,13 @@ const create = async (req, res) => {
     password: hashPassword(password),
     name,
     email,
-    barCode
+    barcode
   });
   res.send({
     id: user.id,
     name: user.name,
     username: user.username,
-    barCode: user.barCode 
+    barcode: user.barcode 
   });
 };
 
@@ -28,7 +28,7 @@ const getAll = async (req, res) => {
     id: user.id,
     name: user.name,
     username: user.username,
-    barCode: user.barCode
+    barcode: user.barcode
   }));
   res.send(jsonUsers);
 };
@@ -40,7 +40,7 @@ const update = async (req, res) => {
     password,
     name,
     email,
-    barCode
+    barcode
   } = req.body;
   const user = await User.findByPk(id);
   if (!user) {
@@ -51,7 +51,7 @@ const update = async (req, res) => {
     username,
     name,
     email,
-    barCode
+    barcode
   });
   if (password) {
     user.setAttributes({ password: hashPassword(password) });
@@ -61,7 +61,7 @@ const update = async (req, res) => {
     id: user.id,
     name: user.name,
     username: user.username,
-    barCode: user.barCode 
+    barcode: user.barcode 
   });
 };
 
@@ -76,9 +76,30 @@ const destroy = async (req, res) => {
   res.status(204).send();
 };
 
+const getByBarcode = async (req, res) => {
+  const barcode = req.params.barcode;
+  const users = await User.findAll({
+    where: {
+      barcode
+    }
+  });
+  if (users.length <= 0) {
+    res.send(null);
+    return;
+  }
+  const user = users[0];
+  res.send({
+    id: user.id,
+    name: user.name,
+    username: user.username,
+    barcode: user.barcode
+  });
+};
+
 module.exports = {
   getAll,
   create,
   update,
-  destroy
+  destroy,
+  getByBarcode
 };

@@ -41,6 +41,7 @@ const buttonsForStudent = [
 const buttonsForAdmin = [
   { label: "Books", href: "/books" },
   { label: "Users", href: "/users" },
+  { label: "User Scan", href: "/user-scan" },
 ];
 
 const LeftMenu = () => {
