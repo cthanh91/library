@@ -1,5 +1,5 @@
 const { Book, Borrowing } = require('../models');
-const { Op } = require('sequelize');
+const { Op, fn, col } = require('sequelize');
 
 const getAll = async (req, res) => {
   const books = await Book.findAll();
@@ -46,14 +46,36 @@ const search = async (req, res) => {
       }
     }
   });
+  const bookIds = books.map(book => book.id);
+  const borrowingCounts = await getBorrowingCounts(bookIds);
+  console.log(borrowingCounts)
   const result = books.map(book => ({
     author: book.author,
     id: book.id,
     publishedDate: book.publishedDate,
-    title: book.title
+    title: book.title,
+    remaining: book.quantity - (borrowingCounts[book.id] || 0)
   }));
   res.send(result);
 };
+
+const getBorrowingCounts = async (bookIds) =>{
+  const borrowingCounts = await Borrowing.findAll({
+    where: {
+      bookId: bookIds
+    },
+    attributes: [
+      'bookId',
+      [fn('COUNT', col('id')), 'count'],
+    ],
+    group: "bookId"
+  });
+  const result = {};
+  borrowingCounts.forEach(borrowingCount => {
+    result[borrowingCount.bookId] = parseInt(borrowingCount.dataValues.count);
+  });
+  return result;
+}
 
 const borrow = async (req, res) => {
   const bookId = req.params.id;
@@ -70,29 +92,8 @@ const borrow = async (req, res) => {
   res.status(204).send(borrowing);
 };
 
-const getBorrowingBooks = async (req, res) => {
-  const borrowings = await Borrowing.findAll({
-    where: {
-      userId: req.session.user.id
-    }
-  });
-  const borrowingBooks = await Book.findAll({
-    where: {
-      id: borrowings.map(borrowing => borrowing.bookId)
-    }
-  });
-  const result = borrowingBooks.map(book => ({
-    author: book.author,
-    id: book.id,
-    borrowedDate: book.createdAt,
-    title: book.title
-  }));
-  res.send(result);
-};
-
 module.exports = {
   getAll,
-  getBorrowingBooks,
   create,
   update,
   destroy,

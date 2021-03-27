@@ -45,9 +45,17 @@ const BookResult = (props) => {
               <TableCell>{book.author}</TableCell>
               <TableCell>{book.publishedDate}</TableCell>
               <TableCell>
-                <Button variant="contained" onClick={() => props.onBorrow(book)} color="primary">
-                  Borrow
-                </Button>
+                {
+                  book.remaining > 0 ? (
+                    <Button variant="contained" onClick={() => props.onBorrow(book)} color="primary">
+                      Borrow
+                    </Button>
+                  ) : (
+                    <Button variant="contained" color="secondary">
+                      Unavailable
+                    </Button> 
+                  )
+                }
               </TableCell>
             </TableRow>
           ))}
