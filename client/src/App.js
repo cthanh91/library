@@ -5,6 +5,7 @@ import Users from './page/users';
 import Borrow from './page/borrow';
 import Borrowing from './page/borrowing';
 import UserScan from './page/userScan';
+import Regulations from './page/regulations';
 import './App.css';
 import {
   Switch,
@@ -48,6 +49,7 @@ const App = () => {
           <Route exact path="/borrow" component={Borrow} />
           <Route exact path="/borrowing" component={Borrowing} />
           <Route exact path="/user-scan" component={UserScan} />
+          <Route exact path="/regulations" component={Regulations} />
           <Route path="*" component={NotFound} />
         </Switch>
       ) : (

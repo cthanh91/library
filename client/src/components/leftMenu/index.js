@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const buttonsForStudent = [
   { label: "Borrow", href: "/borrow" },
   { label: "Borrowing", href: "/borrowing" },
+  { label: "Regulations", href: "/regulations" },
 ];
 
 const buttonsForAdmin = [
