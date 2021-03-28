@@ -7,7 +7,7 @@ module.exports = {
     "database": process.env.DB_NAME,
     "host": process.env.DB_HOST,
     "seederStorage": "sequelize",
-    "seederStorageTableName": "sequelize_data",
+    "seederStorageTableName": "SequelizeData",
     "dialect": "postgres"
   },
   "test": {
@@ -16,7 +16,7 @@ module.exports = {
     "database": "database_test",
     "host": "127.0.0.1",
     "seederStorage": "sequelize",
-    "seederStorageTableName": "sequelize_data",
+    "seederStorageTableName": "SequelizeData",
     "dialect": "mysql"
   },
   "production": {
@@ -25,7 +25,7 @@ module.exports = {
     "database": "database_production",
     "host": "127.0.0.1",
     "seederStorage": "sequelize",
-    "seederStorageTableName": "sequelize_data",
+    "seederStorageTableName": "SequelizeData",
     "dialect": "mysql"
   }
 };
