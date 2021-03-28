@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
@@ -35,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     marginLeft: 20,
     width: 170
+  },
+  imgContainer: {
+    margin: "0 40px",
+  },
+  imgHeader: {
+    width: "100%",
+    height: 250
   }
 }));
 
@@ -51,10 +58,13 @@ const Borrow = () => {
   const [borrowingBook, setBorrowingBook] = useState(null);
   const [searchCategory, setSearchCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
+  const searchBook = async (text, category) => {
+    const result = await api.searchBook(text, category);
+    setBooks(result);
+  };
   const onEnter = async (e) => {
     if (e.keyCode === 13) {
-      const result = await api.searchBook(searchText, searchCategory);
-      setBooks(result);
+      searchBook(searchText, searchCategory);
     }
   };
   const onBorrow = (book) => {
@@ -69,14 +79,18 @@ const Borrow = () => {
   const onSelectCategory = async (e) => {
     const category = e.target.value;
     setSearchCategory(category);
-    const result = await api.searchBook(searchText, category);
-    setBooks(result);
+    searchBook(searchText, category);
   };
+  useEffect(() => {
+    searchBook("", "all");
+  }, []);
 
   return (
     <Template>
+      <div className={classes.imgContainer}>
+        <img src="/backdrop.jpg" alt="back-drop" className={classes.imgHeader} />
+      </div>
       <Container maxWidth="md" className={classes.container}>
-        <h1 className={classes.header}>Brrow Book</h1>
         <Box className={classes.searchBarContainer}>
           <TextField
             className={classes.searchBar}

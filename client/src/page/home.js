@@ -1,3 +1,6 @@
+import {
+  Redirect
+} from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import { makeStyles } from "@material-ui/core/styles";
 import Template from '../template';
@@ -13,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
   const classes = useStyles();
+  const userRole = window.localStorage.userRole;
+  if (!userRole || !userRole.includes("Administrator")) {
+    return <Redirect to="/borrow" />
+  }
 
   return (
     <Template>
