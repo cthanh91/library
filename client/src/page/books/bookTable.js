@@ -35,6 +35,7 @@ const BookTable = (props) => {
           <TableRow>
             <TableCell>Title</TableCell>
             <TableCell>Author</TableCell>
+            <TableCell>Category</TableCell>
             <TableCell>Published Date</TableCell>
             <TableCell>Quantity</TableCell>
             <TableCell>Action</TableCell>
@@ -45,6 +46,7 @@ const BookTable = (props) => {
             <TableRow key={book.id}>
               <TableCell>{book.title}</TableCell>
               <TableCell>{book.author}</TableCell>
+              <TableCell>{book.category}</TableCell>
               <TableCell>{book.publishedDate}</TableCell>
               <TableCell>{book.quantity}</TableCell>
               <TableCell>

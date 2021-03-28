@@ -8,20 +8,20 @@ const getAll = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { title, author, publishedDate, quantity } = req.body;
-  const createdBook = await Book.create({ title, author, publishedDate, quantity })
+  const { title, author, category, publishedDate, quantity } = req.body;
+  const createdBook = await Book.create({ title, author, category, publishedDate, quantity })
   res.send(createdBook.toJSON());
 };
 
 const update = async (req, res) => {
   const id = req.params.id;
-  const { title, author, publishedDate, quantity } = req.body;
+  const { title, author, category, publishedDate, quantity } = req.body;
   const book = await Book.findByPk(id);
   if (!book) {
     res.status(404).send();
     return;
   } 
-  book.setAttributes({ title, author, publishedDate, quantity });
+  book.setAttributes({ title, author, category, publishedDate, quantity });
   await book.save(); 
   res.send(book.toJSON());
 };
@@ -48,7 +48,6 @@ const search = async (req, res) => {
   });
   const bookIds = books.map(book => book.id);
   const borrowingCounts = await getBorrowingCounts(bookIds);
-  console.log(borrowingCounts)
   const result = books.map(book => ({
     author: book.author,
     id: book.id,
