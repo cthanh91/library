@@ -34,22 +34,18 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [deletingUser, setDeletingUser] = useState(null);
-
   const openNew = useCallback(() => {
     setEditingUser(null);
     setUserDialogOpen(true);
   }, []);
-
   const closeUserDialog = useCallback(() => {
     setUserDialogOpen(false);
   }, []);
-
   const createUser = async (user) => {
     const newUser = await userApi.createUser(user);
     setUsers([newUser, ...users]);
     setUserDialogOpen(false);
   };
-
   const editUser = async (id, user) => {
     const updatedUser = await userApi.editUser(id, user);
     const updatedUsers = users.map((userItem) => {
@@ -60,7 +56,6 @@ const Users = () => {
     setUserDialogOpen(false);
     setEditingUser(null);
   };
-
   const deleteUser = async () => {
     await userApi.deleteUser(deletingUser.id);
     const updatedUsers = users.filter(userItem => userItem.id !== deletingUser.id);
@@ -68,21 +63,17 @@ const Users = () => {
     setConfirmDialogOpen(false);
     setDeletingUser(null);
   };
-
   const closeConfirmDialog = useCallback(() => {
     setConfirmDialogOpen(false);
   }, []);
-
   const openEdit = useCallback(async (user) => {
     setEditingUser(user);
     setUserDialogOpen(true);
   }, []);
-
   const openDelete = useCallback(async (user) => {
     setDeletingUser(user);
     setConfirmDialogOpen(true);
   }, []);
-
   useEffect(() => {
     const getData = async () => {
       const users = await userApi.getUsers();

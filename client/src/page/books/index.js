@@ -34,22 +34,18 @@ const Books = () => {
   const [books, setBooks] = useState([]);
   const [editingBook, setEditingBook] = useState(null);
   const [deletingBook, setDeletingBook] = useState(null);
-
   const openNew = useCallback(() => {
     setEditingBook(null);
     setBookDialogOpen(true);
   }, []);
-
   const closeBookDialog = useCallback(() => {
     setBookDialogOpen(false);
   }, []);
-
   const createBook = async (book) => {
     const newBook = await bookApi.createBook(book);
     setBooks([newBook, ...books]);
     setBookDialogOpen(false);
   };
-
   const editBook = async (id, book) => {
     const updatedBook = await bookApi.editBook(id, book);
     const updatedBooks = books.map(bookItem => {
@@ -60,7 +56,6 @@ const Books = () => {
     setEditingBook(null);
     setBookDialogOpen(false);
   };
-
   const deleteBook = async () => {
     await bookApi.deleteBook(deletingBook.id);
     const updatedBooks = books.filter(bookItem => bookItem.id !== deletingBook.id);
@@ -68,21 +63,17 @@ const Books = () => {
     setConfirmDialogOpen(false);
     setDeletingBook(null);
   };
-
   const closeConfirmDialog = useCallback(() => {
     setConfirmDialogOpen(false);
   }, []);
-
   const openEdit = useCallback(async (book) => {
     setEditingBook(book);
     setBookDialogOpen(true);
   }, []);
-
   const openDelete = useCallback(async (book) => {
     setDeletingBook(book);
     setConfirmDialogOpen(true);
   }, []);
-
   useEffect(() => {
     const getData = async () => {
       const books = await bookApi.getBooks();

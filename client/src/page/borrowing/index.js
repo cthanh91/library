@@ -29,12 +29,10 @@ const Borrowing = () => {
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
   const [returningBorrowing, setReturningBorrowing] = useState(null);
-
   const onReturn = (borrowing) => {
     setReturningBorrowing(borrowing);
     setConfirmDialogOpen(true);
   };
-
   const returnBorrowing = async () => {
     await api.deleteBorrowing(returningBorrowing.id);
     const updatedBorrowings = borrowings.filter(borrowing => borrowing.id !== returningBorrowing.id);
@@ -43,7 +41,6 @@ const Borrowing = () => {
     setReturningBorrowing(null);
     setAlertDialogOpen(true);
   };
-
   useEffect(() => {
     const getData = async () => {
       const borrowings = await api.getBorrowingBooks();

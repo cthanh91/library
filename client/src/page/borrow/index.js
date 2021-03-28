@@ -51,7 +51,6 @@ const Borrow = () => {
   const [borrowingBook, setBorrowingBook] = useState(null);
   const [searchCategory, setSearchCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
-
   const onEnter = async (e) => {
     if (e.keyCode === 13) {
       const result = await api.searchBook(searchText, searchCategory);

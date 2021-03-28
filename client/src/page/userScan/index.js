@@ -30,7 +30,6 @@ const UserScan = () => {
   const classes = useStyles();
   const [barcode, setBarcode] = useState("");
   const [foundUser, setFoundUser] = useState(null);
-
   const onKeyUp = async (e) => {
     if (e.keyCode === 13 && barcode) {
       const user = await api.getUserByBarcode(barcode);
@@ -38,7 +37,6 @@ const UserScan = () => {
       setBarcode("");
     }
   };
-
   const onChange = async (e) => {
     setBarcode(e.target.value);
   };
