@@ -80,7 +80,7 @@ const Borrowing = () => {
       }
       <AlertDialog
         open={alertDialogOpen}
-        textContent={`Please go to library to return the book`}
+        textContent={'Please return within 24 hours, else your account will be blocked for 6 months'}
         onDialogClose={() => setAlertDialogOpen(false)}
       />
     </Template>

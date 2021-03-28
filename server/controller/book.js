@@ -38,19 +38,24 @@ const destroy = async (req, res) => {
 };
 
 const search = async (req, res) => {
-  const text = req.query.text;
+  const { text, category } = req.query;
+  const whereObj = {
+    title: {
+      [Op.iLike]: `%${text}%`,
+    },
+  };
+  if (category && category !== 'all') {
+    whereObj.category = category;
+  }
   const books = await Book.findAll({
-    where: {
-      title: {
-        [Op.iLike]: `%${text}%`
-      }
-    }
+    where: whereObj
   });
   const bookIds = books.map(book => book.id);
   const borrowingCounts = await getBorrowingCounts(bookIds);
   const result = books.map(book => ({
-    author: book.author,
     id: book.id,
+    author: book.author,
+    category: book.category,
     publishedDate: book.publishedDate,
     title: book.title,
     remaining: book.quantity - (borrowingCounts[book.id] || 0)

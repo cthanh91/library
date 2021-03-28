@@ -49,9 +49,9 @@ export const deleteBook = async (id, book) => {
   }
 };
 
-export const searchBook = async (searchText) => {
+export const searchBook = async (searchText, searchCategory) => {
   try {
-    const res = await axios.get(`${API_BASE_URL}/book/search?text=${searchText}`,{
+    const res = await axios.get(`${API_BASE_URL}/book/search?text=${searchText}&category=${searchCategory}`,{
       withCredentials: true,
     });
     return res.data;

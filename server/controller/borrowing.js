@@ -19,7 +19,8 @@ const getAll = async (req, res) => {
       borrowedDate: borrowing.createdAt,
       book: {
         title: book.title,
-        author: book.author
+        author: book.author,
+        category: book.category
       }
     }
   });

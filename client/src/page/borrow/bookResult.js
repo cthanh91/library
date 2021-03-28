@@ -34,6 +34,7 @@ const BookResult = (props) => {
           <TableRow>
             <TableCell>Title</TableCell>
             <TableCell>Author</TableCell>
+            <TableCell>Category</TableCell>
             <TableCell>Published Date</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
@@ -43,6 +44,7 @@ const BookResult = (props) => {
             <TableRow key={book.id}>
               <TableCell>{book.title}</TableCell>
               <TableCell>{book.author}</TableCell>
+              <TableCell>{book.category}</TableCell>
               <TableCell>{book.publishedDate}</TableCell>
               <TableCell>
                 {

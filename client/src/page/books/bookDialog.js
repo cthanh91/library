@@ -88,7 +88,7 @@ const BookDialog = (props) => {
           onChange={(e) => setAuthor(e.target.value)}
           required
         />
-        <FormControl className={classes.formControl}>
+        <FormControl>
           <InputLabel>Category</InputLabel>
           <Select
             value={category}
