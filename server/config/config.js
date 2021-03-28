@@ -6,6 +6,8 @@ module.exports = {
     "password": process.env.DB_PASSWORD,
     "database": process.env.DB_NAME,
     "host": process.env.DB_HOST,
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_data",
     "dialect": "postgres"
   },
   "test": {
@@ -13,6 +15,8 @@ module.exports = {
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_data",
     "dialect": "mysql"
   },
   "production": {
@@ -20,6 +24,8 @@ module.exports = {
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_data",
     "dialect": "mysql"
   }
 };
