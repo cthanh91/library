@@ -36,6 +36,7 @@ const BookResult = (props) => {
             <TableCell>Author</TableCell>
             <TableCell>Category</TableCell>
             <TableCell>Published Date</TableCell>
+            <TableCell>Remaining</TableCell>
             <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -46,6 +47,7 @@ const BookResult = (props) => {
               <TableCell>{book.author}</TableCell>
               <TableCell>{book.category}</TableCell>
               <TableCell>{book.publishedDate}</TableCell>
+              <TableCell>{book.remaining}</TableCell>
               <TableCell>
                 {
                   book.remaining > 0 ? (
