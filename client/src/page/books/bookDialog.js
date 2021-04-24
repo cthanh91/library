@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -37,6 +38,7 @@ const categoryOptions = BOOK_CATEGORY.map((category) => ({
 
 const BookDialog = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const editingBook = props.editingBook || {};
   const [title, setTitle] = useState(editingBook.title || "");
   const [author, setAuthor] = useState(editingBook.author || "");
@@ -73,23 +75,23 @@ const BookDialog = (props) => {
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title" className={classes.dialogTitle}>
-        Book
+        {t('Book')}
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
         <TextField
-          label="Title"
+          label={t("Title")}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
         <TextField
-          label="Author"
+          label={t("Author")}
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
         />
         <FormControl>
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t('Category')}</InputLabel>
           <Select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -102,13 +104,13 @@ const BookDialog = (props) => {
           </Select>
         </FormControl>
         <TextField
-          label="Published Date"
+          label={t("Published Date")}
           value={publishedDate}
           onChange={(e) => setPublishedDate(e.target.value)}
         />
         <TextField
           type="number"
-          label="Quantity"
+          label={t("Quantity")}
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           required
@@ -116,10 +118,10 @@ const BookDialog = (props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onDialogClose} color="secondary">
-          Cancel
+          {t('Cancel')}
         </Button>
         <Button onClick={onSave} color="primary">
-          {isEditing ? "Save" : "Create"}
+          {isEditing ? t("Save") : t("Create")}
         </Button>
       </DialogActions>
     </Dialog>

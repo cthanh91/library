@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Button from "@material-ui/core/Button";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConfirmDialog = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
       <Dialog
@@ -28,10 +30,10 @@ const ConfirmDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onDialogClose} color="secondary">
-            Cancel
+            {t('Cancel')}
           </Button>
           <Button onClick={props.onOk} color="primary">
-            OK
+            {t('OK')}
           </Button>
         </DialogActions>
       </Dialog>

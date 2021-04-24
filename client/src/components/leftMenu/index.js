@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import * as api from '../../api/authenticate';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -47,6 +48,7 @@ const buttonsForAdmin = [
 
 const LeftMenu = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const history = useHistory();
   const logout = useCallback(async () => {
     const isSuccess = await api.logout();
@@ -71,7 +73,7 @@ const LeftMenu = () => {
                 key={button.href}
                 onClick={() => history.push(button.href)}
               >
-                <ListItemText primary={button.label} />
+                <ListItemText primary={t(button.label)} />
               </ListItem>
             ))}
           </List>
@@ -82,7 +84,7 @@ const LeftMenu = () => {
             <ListItemAvatar>
               <Avatar>{userName[0] || "U"}</Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Log Out" />
+            <ListItemText primary={t("Log Out")} />
           </ListItem>
         </Box>
       </Box>

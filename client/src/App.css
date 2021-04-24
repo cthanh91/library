@@ -1,3 +1,25 @@
 .MuiButton-label {
   font-weight: 600;
 }
+
+.local-language-container {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.local-language-button {
+  cursor: pointer;
+  color: gainsboro;
+}
+
+.local-language-button.active {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.local-language-separator {
+  border-left: 1px solid black;
+  margin: 0 5px;
+}

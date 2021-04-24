@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Template from "../../template";
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import Button from "@material-ui/core/Button";
 import BookDialog from "./bookDialog";
 import BookTable from "./bookTable";
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Books = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [bookDialogOpen, setBookDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [books, setBooks] = useState([]);
@@ -85,10 +87,10 @@ const Books = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
-        <h1>Books</h1>
+        <h1>{t('Books')}</h1>
         <div className={classes.funtionContainer}>
           <Button variant="contained" color="primary" onClick={openNew}>
-            New
+            {t('New')}
           </Button>
         </div>
         <BookTable books={books} onEdit={openEdit} onDelete={openDelete} />
@@ -109,7 +111,7 @@ const Books = () => {
         confirmDialogOpen && (
           <ConfirmDialog
             open={confirmDialogOpen}
-            textContent={`Do you want to delete "${deletingBook && deletingBook.title}"?`}
+            textContent={`${t('Do you want to delete')} "${deletingBook && deletingBook.title}"?`}
             onDialogClose={closeConfirmDialog}
             onOk={deleteBook}
           />

@@ -13,7 +13,9 @@ import {
   Redirect
 } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import * as api from './api/authenticate';
+import Typography from "@material-ui/core/Typography";
 
 const NotFound = () => {
   return <div>Not Found</div>;
@@ -32,9 +34,13 @@ const App = () => {
     };
     checkIdentity();
   }, []);
+  const { t, i18n } = useTranslation();
   if (isLoggedIn == null) {
     return null;
   }
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
 
   return (
     <React.Fragment>
@@ -58,6 +64,21 @@ const App = () => {
           <Redirect to="/login" />
         </Switch>
       )}
+      <div className="local-language-container">
+        <Typography
+          className={`local-language-button ${i18n.language === 'en' ? 'active' : ''}`}
+          component="span"
+          onClick={() => changeLanguage('en')}>
+          {t("ENG")}
+        </Typography>
+        <div className="local-language-separator" />
+        <Typography
+          className={`local-language-button ${i18n.language === 'vi' ? 'active' : ''}`}
+          component="span"
+          onClick={() => changeLanguage('vi')}>
+          {t("VIE")}
+        </Typography>
+      </div>
     </React.Fragment>
   );
 }

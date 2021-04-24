@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -27,18 +28,19 @@ const useStyles = makeStyles((theme) => ({
 
 const BookTable = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Author</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell>Published Date</TableCell>
-            <TableCell>Quantity</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell>{t('Title')}</TableCell>
+            <TableCell>{t('Author')}</TableCell>
+            <TableCell>{t('Category')}</TableCell>
+            <TableCell>{t('Published')} Date</TableCell>
+            <TableCell>{t('Quantity')}</TableCell>
+            <TableCell>{t('Action')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

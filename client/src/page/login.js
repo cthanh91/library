@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const login = useCallback(async () => {
@@ -54,7 +56,7 @@ const Login = () => {
         </Grid>
         <Grid item>
           <Typography component="h1" variant="h5">
-            Sign in
+            {t('Sign In')}
           </Typography>
         </Grid>
         <TextField
@@ -62,7 +64,7 @@ const Login = () => {
           margin="normal"
           variant="outlined"
           fullWidth
-          label="Username"
+          label={t('Username')}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           onKeyUp={onKeyUp}
@@ -71,7 +73,7 @@ const Login = () => {
           margin="normal"
           variant="outlined"
           fullWidth
-          label="Password"
+          label={t('Password')}
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +88,7 @@ const Login = () => {
           onClick={login}
           disabled={username.length === 0 && password.length === 0}
         >
-          Sign In
+          {t('Sign In')}
         </Button>
       </Grid>
     </Container>
