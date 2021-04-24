@@ -79,6 +79,8 @@ const LeftMenu = () => {
           <Box className={classes.logoContainer}>
             <MenuBookIcon className={classes.icon} onClick={() => history.push("")} />
             <Typography component="p" className={classes.logoTitle}>
+              Thư Viện
+              <br />
               Trường THPT
               <br />
               Chu Văn An

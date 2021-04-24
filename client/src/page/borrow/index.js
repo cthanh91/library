@@ -109,7 +109,7 @@ const Borrow = () => {
             }}
           />
           <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
+            <InputLabel id="demo-simple-select-outlined-label">{t('Category')}</InputLabel>
             <Select
               labelId="demo-simple-select-filled-label"
               id="demo-simple-select-outlined"

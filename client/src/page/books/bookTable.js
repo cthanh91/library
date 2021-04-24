@@ -38,7 +38,7 @@ const BookTable = (props) => {
             <TableCell>{t('Title')}</TableCell>
             <TableCell>{t('Author')}</TableCell>
             <TableCell>{t('Category')}</TableCell>
-            <TableCell>{t('Published')} Date</TableCell>
+            <TableCell>{t('Published Date')}</TableCell>
             <TableCell>{t('Quantity')}</TableCell>
             <TableCell>{t('Action')}</TableCell>
           </TableRow>
