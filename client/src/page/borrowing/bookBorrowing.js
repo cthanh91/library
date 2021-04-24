@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -27,17 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 const BookBorrowing = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Author</TableCell>
-            <TableCell>Category</TableCell>
-            <TableCell>Borrowed Date</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell>{t('Title')}</TableCell>
+            <TableCell>{t('Author')}</TableCell>
+            <TableCell>{t('Category')}</TableCell>
+            <TableCell>{t('Borrowed Date')}</TableCell>
+            <TableCell>{t('Action')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -49,7 +51,7 @@ const BookBorrowing = (props) => {
               <TableCell>{moment(borrowing.borrowedDate).format("HH:mm DD-MM-YYYY")}</TableCell>
               <TableCell>
                 <Button variant="contained" onClick={() => props.onReturn(borrowing)} color="primary">
-                  Return
+                  {t('Return')}
                 </Button>
               </TableCell>
             </TableRow>

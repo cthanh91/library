@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Borrowing = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [borrowings, setBorrowings] = useState([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
@@ -52,16 +54,16 @@ const Borrowing = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
-        <h1 className={classes.header}>Brrowing Books</h1>
+        <h1 className={classes.header}>{t('Borrowing Books')}</h1>
         {
           borrowings.length > 0 ? (
             <>
-              <Typography>{borrowings.length} Books Borrowing</Typography>
+              <Typography>{borrowings.length} {t('Books Borrowing')}</Typography>
               <BookBorrowing borrowings={borrowings} onReturn={onReturn} />
             </>
           )
           : (
-            <Typography>No Books Borrowing</Typography>
+            <Typography>{t('No Books Borrowing')}</Typography>
           )
         }
       </Container>
@@ -69,7 +71,7 @@ const Borrowing = () => {
         confirmDialogOpen && (
           <ConfirmDialog
             open={confirmDialogOpen}
-            textContent={`Do you want to return "${returningBorrowing && returningBorrowing.book.title}"?`}
+            textContent={`${t('Do you want to return')} "${returningBorrowing && returningBorrowing.book.title}"?`}
             onDialogClose={() => setConfirmDialogOpen(false)}
             onOk={returnBorrowing}
           />
@@ -77,7 +79,7 @@ const Borrowing = () => {
       }
       <AlertDialog
         open={alertDialogOpen}
-        textContent={'Please return within 24 hours, else your account will be blocked for 6 months'}
+        textContent={t('Please return within 24 hours, else your account will be blocked for 6 months')}
         onDialogClose={() => setAlertDialogOpen(false)}
       />
     </Template>

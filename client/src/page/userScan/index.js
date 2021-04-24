@@ -53,7 +53,7 @@ const UserScan = () => {
             value={barcode}
             onChange={onChange}
             onKeyUp={onKeyUp}
-            placeholder={`${t('Barcode')}...`}
+            placeholder={t('Barcode...')}
             type="search"
             variant="outlined"
             autoFocus

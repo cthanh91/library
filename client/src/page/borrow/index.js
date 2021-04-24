@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
@@ -52,6 +53,7 @@ const categoryOptions = BOOK_CATEGORY.map((category) => ({
 
 const Borrow = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [books, setBooks] = useState([]);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
@@ -97,7 +99,7 @@ const Borrow = () => {
             value={searchText}
             onKeyUp={onEnter}
             onChange={e => setSearchText(e.target.value)}
-            placeholder="Search..."
+            placeholder={t("Search...")}
             type="search"
             variant="outlined"
             autoFocus
@@ -116,7 +118,7 @@ const Borrow = () => {
               onChange={onSelectCategory}
             >
               <MenuItem value="all">
-                All
+                {t('All')}
               </MenuItem>
               {categoryOptions.map((option) => (
                 <MenuItem value={option.value} key={option.value}>
@@ -128,17 +130,17 @@ const Borrow = () => {
         </Box>
         {books.length > 0 ? (
           <>
-            <Typography>{books.length} Result</Typography>
+            <Typography>{books.length} {t('Result')}</Typography>
             <BookResult books={books} onBorrow={onBorrow} />
           </>
         ) : (
-          <Typography>No Results</Typography>
+          <Typography>{t('No Results')}</Typography>
         )}
       </Container>
       {confirmDialogOpen && (
         <ConfirmDialog
           open={confirmDialogOpen}
-          textContent={`Do you want to borrow "${
+          textContent={`${t('Do you want to borrow')} "${
             borrowingBook && borrowingBook.title
           }"?`}
           onDialogClose={() => setConfirmDialogOpen(false)}
@@ -147,7 +149,7 @@ const Borrow = () => {
       )}
       <AlertDialog
         open={alertDialogOpen}
-        textContent={`Please go to library to to take the book`}
+        textContent={t('Please go to library to to take the book within 12 hours')}
         onDialogClose={() => setAlertDialogOpen(false)}
       />
     </Template>
