@@ -39,8 +39,10 @@ const App = () => {
     return null;
   }
   const changeLanguage = (lang) => {
+    localStorage.setItem("language", lang);
     i18n.changeLanguage(lang);
   };
+  const currentLanguage = window.localStorage.language || i18n.language;
 
   return (
     <React.Fragment>
@@ -66,14 +68,14 @@ const App = () => {
       )}
       <div className="local-language-container">
         <Typography
-          className={`local-language-button ${i18n.language === 'en' ? 'active' : ''}`}
+          className={`local-language-button ${currentLanguage === 'en' ? 'active' : ''}`}
           component="span"
           onClick={() => changeLanguage('en')}>
           {t("ENG")}
         </Typography>
         <div className="local-language-separator" />
         <Typography
-          className={`local-language-button ${i18n.language === 'vi' ? 'active' : ''}`}
+          className={`local-language-button ${currentLanguage === 'vi' ? 'active' : ''}`}
           component="span"
           onClick={() => changeLanguage('vi')}>
           {t("VIE")}

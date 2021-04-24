@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imgContainer: {
     margin: "0 40px",
+    marginTop: 35
   },
   imgHeader: {
     width: "100%",

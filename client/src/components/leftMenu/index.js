@@ -5,6 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: "#1976d2",
     fontSize: "6rem",
-    padding: "20px",
+    padding: "20px 20px 5px 20px",
     cursor: "pointer"
   },
   drawerBox: {
@@ -31,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between"
+  },
+  logoContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  logoTitle: {
+    textAlign: "center",
+    fontWeight: 600,
+    paddingBottom: 10,
+    boxSizing: "border-box"
   }
 }));
 
@@ -64,7 +76,14 @@ const LeftMenu = () => {
     <Drawer anchor="left" variant="permanent" className={classes.drawer}>
       <Box className={classes.drawerBox}>
         <Box>
-          <MenuBookIcon className={classes.icon} onClick={() => history.push("")} />
+          <Box className={classes.logoContainer}>
+            <MenuBookIcon className={classes.icon} onClick={() => history.push("")} />
+            <Typography component="p" className={classes.logoTitle}>
+              Trường THPT
+              <br />
+              Chu Văn An
+            </Typography>
+          </Box>
           <Divider />
           <List>
             {buttonList.map((button, index) => (
