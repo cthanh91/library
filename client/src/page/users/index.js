@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Template from "../../template";
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import Button from "@material-ui/core/Button";
 import UserDialog from "./userDialog";
 import UserTable from "./userTable";
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Users = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [userDialogOpen, setUserDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [users, setUsers] = useState([]);
@@ -85,10 +87,10 @@ const Users = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
-        <h1>Users</h1>
+        <h1>{t('Users')}</h1>
         <div className={classes.funtionContainer}>
           <Button variant="contained" color="primary" onClick={openNew}>
-            New
+            {t('New')}
           </Button>
         </div>
         <UserTable users={users} onEdit={openEdit} onDelete={openDelete} />
@@ -109,7 +111,7 @@ const Users = () => {
         confirmDialogOpen && (
           <ConfirmDialog
             open={confirmDialogOpen}
-            textContent={`Do you want to delete "${deletingUser && deletingUser.name}"?`}
+            textContent={`${t('Do you want to delete')} "${deletingUser && deletingUser.name}"?`}
             onDialogClose={closeConfirmDialog}
             onOk={deleteUser}
           />

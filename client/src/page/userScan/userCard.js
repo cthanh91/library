@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -19,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 const UserCard = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const { user } = props;
   if (!user) {
-    return <Typography className={classes.centerText}>No User Found</Typography>;
+    return <Typography className={classes.centerText}>{t('No User Found')}</Typography>;
   }
 
   return (
@@ -38,7 +40,7 @@ const UserCard = (props) => {
           {user.username}
         </Typography>
         <Typography>
-          Barcode: {user.barcode}
+          {t('Barcode')}: {user.barcode}
         </Typography>
       </CardContent>
     </Card>

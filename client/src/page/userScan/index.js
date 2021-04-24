@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import Container from "@material-ui/core/Container";
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UserScan = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [barcode, setBarcode] = useState("");
   const [foundUser, setFoundUser] = useState(null);
   const onKeyUp = async (e) => {
@@ -44,14 +46,14 @@ const UserScan = () => {
   return (
     <Template>
       <Container maxWidth="md" className={classes.container}>
-        <h1 className={classes.header}>User Scan</h1>
+        <h1 className={classes.header}>{t('User Scan')}</h1>
         <Box className={classes.searchBarContainer}>
           <TextField
             className={classes.searchBar}
             value={barcode}
             onChange={onChange}
             onKeyUp={onKeyUp}
-            placeholder="Barcode..."
+            placeholder={`${t('Barcode')}...`}
             type="search"
             variant="outlined"
             autoFocus

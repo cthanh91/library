@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -27,16 +28,17 @@ const useStyles = makeStyles((theme) => ({
 
 const UserTable = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Username</TableCell>
-            <TableCell>Barcode</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell>{t('Name')}</TableCell>
+            <TableCell>{t('Username')}</TableCell>
+            <TableCell>{t('Barcode')}</TableCell>
+            <TableCell>{t('Action')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

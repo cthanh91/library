@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Button from "@material-ui/core/Button";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const BookDialog = (props) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const editingUser = props.editingUser || {};
   const [name, setName] = useState(editingUser.name || "");
   const [username, setUsername] = useState(editingUser.username || "");
@@ -57,19 +59,19 @@ const BookDialog = (props) => {
         onClose={props.onDialogClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title" className={classes.dialogTitle}>User</DialogTitle>
+        <DialogTitle id="form-dialog-title" className={classes.dialogTitle}>{t('User')}</DialogTitle>
         <DialogContent className={classes.dialogContent}>
-          <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-          <TextField label="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-          <TextField label="Barcode" value={barcode} onChange={(e) => setBarcode(e.target.value)} />
-          <TextField label="Set New Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <TextField label={t("Name")} value={name} onChange={(e) => setName(e.target.value)} required />
+          <TextField label={t("Username")} value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <TextField label={t("Barcode")} value={barcode} onChange={(e) => setBarcode(e.target.value)} />
+          <TextField label={t("Set New Password")} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onDialogClose} color="secondary">
-            Cancel
+            {t('Cancel')}
           </Button>
           <Button onClick={onSave} color="primary">
-            { isEditing ? 'Save' : 'Create' }
+            { isEditing ? t('Save') : t('Create') }
           </Button>
         </DialogActions>
       </Dialog>
