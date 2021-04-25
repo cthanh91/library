@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontWeight: 600,
     paddingBottom: 10,
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    fontSize: 14
   }
 }));
 
@@ -81,7 +82,7 @@ const LeftMenu = () => {
             <Typography component="p" className={classes.logoTitle}>
               Thư Viện
               <br />
-              Trường THPT
+              Trường THPT Chuyên
               <br />
               Chu Văn An
             </Typography>
