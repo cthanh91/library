@@ -6,8 +6,10 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import * as api from "../../api/user";
+import * as borrowingApi from "../../api/borrowing";
 import Template from "../../template";
 import UserCard from "./userCard";
+import BookBorrowing from "./bookBorrowing";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -27,15 +29,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const getUserAndBorrowing = async (barcode) => {
+  const user = await api.getUserByBarcode(barcode);
+  let borrowings;
+  if (user) {
+    borrowings = await borrowingApi.getBorrowingBooksByUser(user.id);
+  }
+
+  return [user, borrowings]
+};
+
 const UserScan = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [barcode, setBarcode] = useState("");
   const [foundUser, setFoundUser] = useState(null);
+  const [borrowings, setBorrowings] = useState(null);
   const onKeyUp = async (e) => {
     if (e.keyCode === 13 && barcode) {
-      const user = await api.getUserByBarcode(barcode);
+      const [user, borrowings] = await getUserAndBorrowing(barcode);
       setFoundUser(user);
+      setBorrowings(borrowings);
       setBarcode("");
     }
   };
@@ -63,6 +77,7 @@ const UserScan = () => {
           />
         </Box>
         <UserCard user={foundUser} />
+        <BookBorrowing borrowings={borrowings} />
       </Container>
     </Template>
   );

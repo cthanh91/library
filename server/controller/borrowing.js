@@ -2,9 +2,20 @@ const { Book, Borrowing } = require('../models');
 const { Op } = require('sequelize');
 
 const getAll = async (req, res) => {
+  const result = await getByUser(req.session.user.id);
+  res.send(result);
+};
+
+const getAllByUser = async (req, res) => {
+  const result = await getByUser(req.params.id);
+  res.send(result);
+};
+
+const getByUser = async (userId) => {
+  if (!userId) return [];
   const borrowings = await Borrowing.findAll({
     where: {
-      userId: req.session.user.id
+      userId: userId
     }
   });
   const books = await Book.findAll({
@@ -12,7 +23,7 @@ const getAll = async (req, res) => {
       id: borrowings.map(borrowing => borrowing.bookId)
     }
   });
-  const result = borrowings.map(borrowing => {
+  return borrowings.map(borrowing => {
     const book = books.find(b => b.id === borrowing.bookId);
     return {
       id: borrowing.id,
@@ -24,7 +35,6 @@ const getAll = async (req, res) => {
       }
     }
   });
-  res.send(result);
 };
 
 const destroy = async (req, res) => {
@@ -45,5 +55,6 @@ const destroy = async (req, res) => {
 
 module.exports = {
   getAll,
+  getAllByUser,
   destroy
 };

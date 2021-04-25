@@ -27,6 +27,7 @@ router.post("/user", isLoggedIn, isAdmin, user.create);
 router.put("/user/:id", isLoggedIn, isAdmin, user.update);
 router.delete("/user/:id", isLoggedIn, isAdmin, user.destroy);
 router.get("/user/barcode/:barcode", isLoggedIn, isAdmin, user.getByBarcode);
+router.get("/user/:id/borrowing", isLoggedIn, isAdmin, borrowing.getAllByUser);
 
 router.get("/identity", isLoggedIn, authentication.checkIdentity);
 
