@@ -2,6 +2,8 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -13,7 +15,7 @@ import {
   useHistory
 } from "react-router-dom";
 import * as api from '../../api/authenticate';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 10,
     boxSizing: "border-box",
     fontSize: 14
+  },
+  menuIcon: {
+    display: "flex",
+    justifyContent: "center"
   }
 }));
 
@@ -72,9 +78,10 @@ const LeftMenu = () => {
   const userRole = window.localStorage.userRole;
   const userName = window.localStorage.userName || "";
   const buttonList = userRole && userRole.includes("Administrator") ? buttonsForAdmin : buttonsForStudent;
+  const [menuOpen, openMenu] = useState(false);
 
   return (
-    <Drawer anchor="left" variant="permanent" className={classes.drawer}>
+    <Drawer anchor="left" variant="permanent" className={classes.drawer + " rs-left-menu"}>
       <Box className={classes.drawerBox}>
         <Box>
           <Box className={classes.logoContainer}>
@@ -88,7 +95,16 @@ const LeftMenu = () => {
             </Typography>
           </Box>
           <Divider />
-          <List>
+          <Box className={classes.menuIcon + " rs-menu"}>
+            {
+              menuOpen ? (
+                <MenuOpenRoundedIcon fontSize="large" color="primary" onClick={() => openMenu(false)} />
+              ) : (
+                <MenuRoundedIcon fontSize="large" color="primary" onClick={() => openMenu(true)} />
+              )
+            }
+          </Box>
+          <List className={menuOpen ? "" : "hidden"}>
             {buttonList.map((button, index) => (
               <ListItem
                 button
@@ -100,7 +116,7 @@ const LeftMenu = () => {
             ))}
           </List>
         </Box>
-        <Box>
+        <Box className={menuOpen ? "" : "hidden"}>
           <Divider />
           <ListItem button onClick={logout}>
             <ListItemAvatar>

@@ -23,3 +23,40 @@
   border-left: 1px solid black;
   margin: 0 5px;
 }
+
+@media all and (min-width: 769px) {
+  .rs-menu {
+    display: none !important;     
+  }
+}
+
+@media all and (max-width: 768px) {
+  .rs-template.MuiBox-root {
+    display: block;
+  }
+
+  .rs-left-menu.MuiDrawer-root {
+    width: auto;
+    height: auto;
+  }
+
+  .rs-left-menu.MuiDrawer-root>.MuiPaper-root {
+    position: unset;
+  }
+
+  .rs-left-menu.MuiDrawer-root>.MuiPaper-root>.MuiBox-root {
+    height: auto;
+  }
+
+  .rs-left-menu.MuiDrawer-root>.MuiPaper-root>.MuiBox-root .MuiButtonBase-root {
+    justify-content: center;
+  }
+
+  .rs-left-menu.MuiDrawer-root>.MuiPaper-root>.MuiBox-root .MuiButtonBase-root>.MuiListItemText-root{
+    flex: none;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+}

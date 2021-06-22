@@ -15,7 +15,7 @@ const Template = (props) => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.page}>
+    <Box className={classes.page + " rs-template"}>
       <LeftMenu />
       <Box className={classes.main}>
         {props.children}
