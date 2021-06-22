@@ -150,7 +150,7 @@ const Borrow = () => {
       )}
       <AlertDialog
         open={alertDialogOpen}
-        textContent={t('Please go to library to to take the book within 12 hours')}
+        textContent={t('Please go to library to take the book within 24 hours')}
         onDialogClose={() => setAlertDialogOpen(false)}
       />
     </Template>

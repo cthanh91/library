@@ -36,7 +36,7 @@
   "No Results": "Không Tìm Thấy Sách",
   "Search...": "Tìm",
   "Do you want to borrow": "Bạn muốn mượn",
-  "Please go to library to to take the book within 12 hours": "Vui lòng tới thư viện để lấy sách trong vòng 12 giờ",
+  "Please go to library to take the book within 24 hours": "Vui lòng tới thư viện để lấy sách trong vòng 24 giờ",
   "Got It": "Đã Đọc",
   "Remaining": "Số Lượng Còn",
   "Unavailable": "Không Còn",
@@ -48,6 +48,7 @@
   "Borrowed Date": "Ngày Mượn",
   "Return": "Trả",
   "You need to return book to Library within 24 hous after clicking Return button on website, if not your account will be blocked for 6 months.": "Bạn cần phải trả sách cho thư viện trong vòng 24 giờ đồng hồ ngay sau khi bấm nút Trả Sách, nếu không tài khoản của bạn sẽ bị khóa trong vòng 6 tháng.",
+  "You need to go to the Library to get your books within 24 hours after clicking Borrow button on website, if not your request will be cancelled.": "Bạn cần đến thư viện lấy sách trong vòng 24 giờ đồng hồ ngay sau khi bấm nút Mượn Sách, nếu không yêu cầu của bạn sẽ bị hủy bỏ.",
   "If you lost the book, you have to pay for it.": "Nếu bạn làm mất sách, bạn sẽ phải đền tiền sách tương ứng với giá của cuốn sách.",
   "If you lost the Library card, you have to pay 50.000 VND.": "Nếu làm mất thẻ thư viện, vui lòng trả phí 50.000 VND"
 }

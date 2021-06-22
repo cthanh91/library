@@ -80,11 +80,11 @@ const LeftMenu = () => {
           <Box className={classes.logoContainer}>
             <MenuBookIcon className={classes.icon} onClick={() => history.push("")} />
             <Typography component="p" className={classes.logoTitle}>
-              Thư Viện
+              The Library of
               <br />
-              Trường THPT Chuyên
+              Chu Van An high school
               <br />
-              Chu Văn An
+              for the gifted
             </Typography>
           </Box>
           <Divider />

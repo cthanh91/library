@@ -24,6 +24,9 @@ const Regulations = () => {
           <li>
             {t('You need to return book to Library within 24 hous after clicking Return button on website, if not your account will be blocked for 6 months.')}
           </li>
+          <li>
+            {t('You need to go to the Library to get your books within 24 hours after clicking Borrow button on website, if not your request will be cancelled.')}
+          </li>
           <li>{t('If you lost the book, you have to pay for it.')}</li>
           <li>
             {t('If you lost the Library card, you have to pay 50.000 VND.')}
