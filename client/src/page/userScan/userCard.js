@@ -40,6 +40,12 @@ const UserCard = (props) => {
           {user.username}
         </Typography>
         <Typography>
+          {t('Position')}: {user.position}
+        </Typography>
+        <Typography>
+          {t('School Year')}: {user.schoolYear}
+        </Typography>
+        <Typography>
           {t('Barcode')}: {user.barcode}
         </Typography>
       </CardContent>

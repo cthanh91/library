@@ -35,7 +35,7 @@ const BookBorrowing = (props) => {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>{t('Title')}</TableCell>
+            <TableCell>{t('Position')}</TableCell>
             <TableCell>{t('Author')}</TableCell>
             <TableCell>{t('Category')}</TableCell>
             <TableCell>{t('Borrowed Date')}</TableCell>

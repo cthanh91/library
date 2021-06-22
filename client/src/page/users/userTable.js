@@ -37,6 +37,9 @@ const UserTable = (props) => {
           <TableRow>
             <TableCell>{t('Name')}</TableCell>
             <TableCell>{t('Username')}</TableCell>
+            <TableCell>{t('Position')}</TableCell>
+            <TableCell>{t('Date Of Birth')}</TableCell>
+            <TableCell>{t('School Year')}</TableCell>
             <TableCell>{t('Barcode')}</TableCell>
             <TableCell>{t('Action')}</TableCell>
           </TableRow>
@@ -46,6 +49,9 @@ const UserTable = (props) => {
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.username}</TableCell>
+              <TableCell>{user.position}</TableCell>
+              <TableCell>{user.dateOfBirth}</TableCell>
+              <TableCell>{user.schoolYear}</TableCell>
               <TableCell>{user.barcode}</TableCell>
               <TableCell>
                 <EditIcon fontSize="small" onClick={() => props.onEdit(user)} />

@@ -28,7 +28,7 @@
   "Set New Password": "Mật Khẩu Mới",
   "User": "Người Dùng",
   "No User Found": "Không Tìm Thấy Người Dùng",
-  "Borrow": "Mượn Sách",
+  "Borrow": "Đặt Mượn",
   "Borrowing": "Sách Đang Mượn",
   "Regulations": "Chính Sách",
   "All": "Tất Cả",
@@ -46,9 +46,12 @@
   "Do you want to return": "Bạn muốn trả",
   "Please return within 24 hours, else your account will be blocked for 6 months": "Vui lòng trả sách trong vòng 24 giờ, nếu không tài khoản của bạn sẽ bị khóa trong 6 tháng",
   "Borrowed Date": "Ngày Mượn",
-  "Return": "Trả",
+  "Return": "Đăng Ký Trả",
   "You need to return book to Library within 24 hous after clicking Return button on website, if not your account will be blocked for 6 months.": "Bạn cần phải trả sách cho thư viện trong vòng 24 giờ đồng hồ ngay sau khi bấm nút Trả Sách, nếu không tài khoản của bạn sẽ bị khóa trong vòng 6 tháng.",
   "You need to go to the Library to get your books within 24 hours after clicking Borrow button on website, if not your request will be cancelled.": "Bạn cần đến thư viện lấy sách trong vòng 24 giờ đồng hồ ngay sau khi bấm nút Mượn Sách, nếu không yêu cầu của bạn sẽ bị hủy bỏ.",
   "If you lost the book, you have to pay for it.": "Nếu bạn làm mất sách, bạn sẽ phải đền tiền sách tương ứng với giá của cuốn sách.",
-  "If you lost the Library card, you have to pay 50.000 VND.": "Nếu làm mất thẻ thư viện, vui lòng trả phí 50.000 VND"
+  "If you lost the Library card, you have to pay 50.000 VND.": "Nếu làm mất thẻ thư viện, vui lòng trả phí 50.000 VND",
+  "Position": "Chức Danh",
+  "School Year": "Niên Khóa",
+  "Date Of Birth": "Ngày Sinh"
 }

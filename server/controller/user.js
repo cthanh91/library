@@ -1,8 +1,18 @@
 const { User } = require('../models');
 const { hashPassword } = require('../util/password'); 
 
+const toUserResponseObject = (user) => ({
+  id: user.id,
+  name: user.name,
+  username: user.username,
+  dateOfBirth: user.dateOfBirth,
+  schoolYear: user.schoolYear,
+  position: user.position,
+  barcode: user.barcode  
+});
+
 const create = async (req, res) => {
-  const { username, password, name, email, barcode } = req.body;
+  const { username, password, name, email, barcode, dateOfBirth, schoolYear, position } = req.body;
   if (!username || !password || !name || !barcode) {
     res.status(400).send('Missing params');
     return;
@@ -12,24 +22,17 @@ const create = async (req, res) => {
     password: hashPassword(password),
     name,
     email,
+    dateOfBirth,
+    schoolYear,
+    position,
     barcode
   });
-  res.send({
-    id: user.id,
-    name: user.name,
-    username: user.username,
-    barcode: user.barcode 
-  });
+  res.send(toUserResponseObject(user));
 };
 
 const getAll = async (req, res) => {
   const users = await User.findAll();
-  const jsonUsers = users.map(user => ({
-    id: user.id,
-    name: user.name,
-    username: user.username,
-    barcode: user.barcode
-  }));
+  const jsonUsers = users.map(toUserResponseObject);
   res.send(jsonUsers);
 };
 
@@ -40,6 +43,9 @@ const update = async (req, res) => {
     password,
     name,
     email,
+    dateOfBirth,
+    schoolYear,
+    position,
     barcode
   } = req.body;
   const user = await User.findByPk(id);
@@ -51,18 +57,16 @@ const update = async (req, res) => {
     username,
     name,
     email,
+    dateOfBirth,
+    schoolYear,
+    position,
     barcode
   });
   if (password) {
     user.setAttributes({ password: hashPassword(password) });
   }
   await user.save(); 
-  res.send({
-    id: user.id,
-    name: user.name,
-    username: user.username,
-    barcode: user.barcode 
-  });
+  res.send(toUserResponseObject(user));
 };
 
 const destroy = async (req, res) => {
@@ -88,12 +92,7 @@ const getByBarcode = async (req, res) => {
     return;
   }
   const user = users[0];
-  res.send({
-    id: user.id,
-    name: user.name,
-    username: user.username,
-    barcode: user.barcode
-  });
+  res.send(toUserResponseObject(user));
 };
 
 module.exports = {

@@ -26,12 +26,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const BookDialog = (props) => {
+const UserDialog = (props) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const editingUser = props.editingUser || {};
   const [name, setName] = useState(editingUser.name || "");
   const [username, setUsername] = useState(editingUser.username || "");
+  const [position, setPosition] = useState(editingUser.position || "");
+  const [dateOfBirth, setDateOfBirth] = useState(editingUser.dateOfBirth || "");
+  const [schoolYear, setSchoolYear] = useState(editingUser.schoolYear || "");
   const [barcode, setBarcode] = useState(editingUser.barcode || "");
   const [password, setPassword] = useState(editingUser.password || "");
   const isEditing = props.isEditing;
@@ -40,6 +43,9 @@ const BookDialog = (props) => {
       props.onEdit(editingUser.id, {
         name,
         username,
+        position,
+        dateOfBirth,
+        schoolYear,
         barcode,
         password,
       });
@@ -47,6 +53,9 @@ const BookDialog = (props) => {
       props.onCreate({
         name,
         username,
+        position,
+        dateOfBirth,
+        schoolYear,
         barcode,
         password,
       });
@@ -63,6 +72,9 @@ const BookDialog = (props) => {
         <DialogContent className={classes.dialogContent}>
           <TextField label={t("Name")} value={name} onChange={(e) => setName(e.target.value)} required />
           <TextField label={t("Username")} value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <TextField label={t("Position")} value={position} onChange={(e) => setPosition(e.target.value)} required />
+          <TextField label={t("Date Of Birth")} value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
+          <TextField label={t("School Year")} value={schoolYear} onChange={(e) => setSchoolYear(e.target.value)} required />
           <TextField label={t("Barcode")} value={barcode} onChange={(e) => setBarcode(e.target.value)} />
           <TextField label={t("Set New Password")} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </DialogContent>
@@ -78,4 +90,4 @@ const BookDialog = (props) => {
   );
 };
 
-export default BookDialog;
+export default UserDialog;
